@@ -254,8 +254,6 @@ If you have problems running the service try running `docker-compose down` to re
 
 ## Known bugs
 
-Tasks must be created with an OPEN status
-
 Updating a task to CLOSED should return the datePerformed as well
 
 In updateTask API, datePerformed should be automatically added by the server.
