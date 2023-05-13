@@ -58,6 +58,8 @@ curl --location --request POST 'localhost:5001/create-user' \
 
 Here is an example of the flow. Feel free to check the `./backend/integration-tests` directory for more examples.
 
+The get tasks and delete tasks can also be done by the technician's manager. All you have to do is replace the auth token from the technician's auth token to the managers auth token.
+
 ### Create a user
 
 Set the role to either TECHNICIAN or MANAGER.
