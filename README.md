@@ -56,9 +56,9 @@ curl --location --request POST 'localhost:5001/create-user' \
 
 ## How to use the service
 
-Here is an example of the flow. Feel free to check the ./backend/integration-tests directory for more examples.
+Here is an example of the flow. Feel free to check the `./backend/integration-tests` directory for more examples.
 
-# Create a user
+### Create a user
 
 Set the role to either TECHNICIAN or MANAGER.
 If you are creating the role as a TECHNICIAN and want to assign this technician a manager, you need to create a MANAGER first and then asign its uuid in the request to create the TECHNICIAN.
@@ -111,7 +111,7 @@ Response:
 }
 ```
 
-# Log in a user
+### Log in a user
 
 Log the user in and you will get an auth token in return. The auth token must be used in any request related to tasks.
 
@@ -124,7 +124,7 @@ curl --location --request POST 'localhost:5001/login-user' \
 }'
 ```
 
-# Create a task
+### Create a task
 
 Create a new task using the access token you got back after logging in.
 
@@ -152,7 +152,7 @@ Response:
 }
 ```
 
-# Update a task
+### Update a task
 
 To upate a task, send back the task with it's uuid and all fields. Overwite the fields you want to update otherwise the blank fields will be set to NULL.
 
@@ -181,7 +181,7 @@ Because we have now set the task to CLOSED, our Redis server has picked up that 
 NOTIFICATION_CHANNEL The tech f9ad34c6-f5da-445a-a20c-1b14b3983b28 performed task 5b35c802-8acf-4a06-99cf-2b6031ffdb4b on date Mon May 01 2023 00:00:00 GMT+0000 (Coordinated Universal Time)
 ```
 
-# Get tasks
+### Get tasks
 
 This API will return a list of tasks created by this technician. If the user making this request is a manager, it will return all tasks created by that manager's technician.
 
@@ -201,7 +201,7 @@ curl --location --request GET 'localhost:5001/get-tasks' \
 }'
 ```
 
-# Delete a task
+### Delete a task
 
 ```
 curl --location --request POST 'localhost:5001/delete-task' \
