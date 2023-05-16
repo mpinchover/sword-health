@@ -8,14 +8,9 @@ use(require("chai-as-promised"));
 import TaskController from "../task-controller";
 describe("controller test suite", () => {
   it("Test create a user", async () => {
-    // expect(provider).not.to.be.null;
-    //  expect(providers.length).to.equal(0);
 
     const authController = new AuthController();
-
     const newUser: User = {
-      // createdAtUTC: new Date(),
-      // uuid: "some-uuid",
       managerUuid: "manager-uuid",
     };
 
@@ -89,21 +84,19 @@ describe("controller test suite", () => {
     expect(res.updatedAtUTC > previousTime).to.be.true;
   });
 
-  // it("Test delete a task with task not found", async () => {
-  //   const taskController = new TaskController();
+  it("Test delete a task with task not found", async () => {
+    const taskController = new TaskController();
 
-  //   const task: Task = {
-  //     uuid: "uuid",
-  //   };
+    const task: Task = {
+      uuid: "uuid",
+    };
 
-  //   let repo = {
-  //     getTaskByUuid: sinon.fake(() => {}),
-  //   };
+    let repo = {
+      getTaskByUuid: sinon.fake(() => {}),
+    };
 
-  //   // @ts-ignore
-  //   taskController.repo = repo;
-
-  //   const res = await taskController.deleteTask("uuid", "user-uuid");
-  //   expect(res.updatedAtUTC > previousTime).to.be.true;
-  // });
+    // @ts-ignore
+    taskController.repo = repo;
+   await expect(taskController.deleteTask("uuid", "user-uuid")).to.be.rejected;
+  });
 });

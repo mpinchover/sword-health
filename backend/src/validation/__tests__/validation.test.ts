@@ -17,13 +17,9 @@ import {
 } from "../../types";
 
 describe("Validation test suite", () => {
-  //   beforeAll(() => {});
-  //   afterAll(() => {});
+
 
   it("Test create a task validation", async () => {
-    // expect(provider).not.to.be.null;
-    //  expect(providers.length).to.equal(0);
-
     expect(() => validateCreateTask(null, 0)).to.throw("req cannot be null");
 
     // @ts-ignore

@@ -2,11 +2,9 @@ import express, { Express, Request, Response } from "express";
 import Handler from "./src/handlers";
 
 import { authenticateToken, setBodyData } from "./src/middleware";
-import { CreateTaskRequest } from "./src/types";
 const cors = require("cors")({ origin: true });
 
 const app: Express = express();
-const port = 5001;
 app.use(cors);
 app.use(express.json());
 

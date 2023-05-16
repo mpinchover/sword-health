@@ -55,25 +55,20 @@ class TaskController {
     } else {
       uuids.add(userUuid);
     }
-
-    console.log("SET OF UUIDS IS");
-    console.log(uuids);
-
+    
     if (!uuids.has(existingTask.createdByUuid))
       throw new Error("Unauthorized to delete this task");
-    // if (existingTask.createdByUuid !== userUuid)
-    //   throw new Error("Unauthorized to delete this task");
 
     existingTask.deletedAtUTC = new Date();
     this.repo.deleteTask(existingTask);
   };
 
+  // if the user is a manager, get all their direct reports 
   getTasks = async (userUuid: string): Promise<Task[]> => {
     const user = await this.repo.getUser(userUuid);
     const uuids = [userUuid];
 
-    // this is a manager
-    if (!user.managerUuid) {
+    if (user.userRole === "MANAGER") {
       const reports = await this.repo.getTechniciansOfManager(userUuid);
       uuids.push(...reports);
     }

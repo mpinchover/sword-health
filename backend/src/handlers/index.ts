@@ -23,9 +23,6 @@ import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 import RedisGateway from "../gateway/redis";
 
-// TODO
-// use TSrynge
-
 class Handler {
   private taskController: TaskController;
   private authController: AuthController;
@@ -40,20 +37,6 @@ class Handler {
   setupRedisSubscribers = async () => {
     await this.redisGateway.setupRedisSubscribers();
   };
-
-  test = async (req: any, res: any) => {
-    try {
-      await this.redisGateway.publish(
-        CONSTANTS.NOTIFICATION_CHANNEL,
-        "THIS IS A NOTIFICATION"
-      );
-      res.send("success");
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  // check to see if the user already exists by email
 
   createUser = async (req: CreateUserRequest, res: Response) => {
     try {
@@ -111,15 +94,11 @@ class Handler {
     }
   };
 
-  // TODO – add in expiration for token
   generateAccessToken = (user: User) => {
     return jwt.sign(user, "test");
   };
 
   // get createdBy uuid from the header
-  // at this point we should have the user uuid in the req
-  // add in params
-  // maybe do some error mapping here as well
   createTask = async (req: CreateTaskRequest, res: Response) => {
     try {
       validateCreateTask(req, CONSTANTS.MAX_WORD_LENGTH);
@@ -134,7 +113,6 @@ class Handler {
     }
   };
 
-  // TODO make sure only the technicians whos task it is can update the task
   updateTask = async (req: UpdateTaskRequest, res: Response) => {
     try {
       validateUpdateTask(req);
@@ -164,9 +142,6 @@ class Handler {
     }
   };
 
-  // TODO's
-  // add a filter option to get tasks by uuid
-  // include pagination
   getTasks = async (req: GetTasksRequest, res: Response) => {
     try {
       validateGetTasks(req);

@@ -8,7 +8,6 @@ import {
   UpdateTaskRequest,
 } from "../src/types";
 import axios from "axios";
-import * as sinon from "sinon";
 use(require("chai-as-promised"));
 
 describe("Create a technician, create a task, update the task, read the task, delete the task", () => {
@@ -23,7 +22,6 @@ describe("Create a technician, create a task, update the task, read the task, de
 
     let url = "http://127.0.0.1:5001/create-user";
     let res = await axios.post(url, createUserRequest);
-    // console.log(res.data);
 
     // @ts-ignore
     const loginUserRequest: LoginUserRequest = {
@@ -32,10 +30,8 @@ describe("Create a technician, create a task, update the task, read the task, de
     };
     url = "http://127.0.0.1:5001/login-user";
     res = await axios.post(url, loginUserRequest);
-    // console.log(res.data);
 
     const headers = {
-      //   "Content-Type": "application/json",
       Authorization: `bearer ${res.data.accessToken}`,
     };
 
@@ -49,7 +45,6 @@ describe("Create a technician, create a task, update the task, read the task, de
     };
     url = "http://127.0.0.1:5001/create-task";
     res = await axios.post(url, createTaskRequest, { headers });
-    // console.log(res.data);
 
     const createdTaskUuid = res.data.uuid;
 
@@ -64,11 +59,9 @@ describe("Create a technician, create a task, update the task, read the task, de
     };
     url = "http://127.0.0.1:5001/update-task";
     res = await axios.post(url, updateTaskRequest, { headers });
-    // console.log(res.data);
 
     url = "http://127.0.0.1:5001/get-tasks";
     res = await axios.get(url, { headers });
-    // console.log(res.data);
     expect(res.data.length).to.equal(1);
 
     // @ts-ignore
@@ -81,8 +74,6 @@ describe("Create a technician, create a task, update the task, read the task, de
     url = "http://127.0.0.1:5001/get-tasks";
     res = await axios.get(url, { headers });
     expect(res.data.length).to.equal(0);
-
-    // expect(1 + 1 === 2).to.be.true;
   });
 
   it("Create 2 technicians and a manager to test read access and delete access", async () => {
@@ -141,7 +132,6 @@ describe("Create a technician, create a task, update the task, read the task, de
     url = "http://127.0.0.1:5001/login-user";
     res = await axios.post(url, loginManager1Request);
     const headersManager1 = {
-      //   "Content-Type": "application/json",
       Authorization: `bearer ${res.data.accessToken}`,
     };
 
@@ -153,10 +143,8 @@ describe("Create a technician, create a task, update the task, read the task, de
 
     url = "http://127.0.0.1:5001/login-user";
     const loginRes1 = await axios.post(url, loginUser1Request);
-    // console.log(res.data);
 
     const headersUser1 = {
-      //   "Content-Type": "application/json",
       Authorization: `bearer ${loginRes1.data.accessToken}`,
     };
 
@@ -171,7 +159,6 @@ describe("Create a technician, create a task, update the task, read the task, de
     // console.log(res.data);
 
     const headersUser2 = {
-      //   "Content-Type": "application/json",
       Authorization: `bearer ${loginRes2.data.accessToken}`,
     };
 
@@ -208,15 +195,12 @@ describe("Create a technician, create a task, update the task, read the task, de
     const user2CreatedTask = res.data;
 
     // now query tech 1 tasks and make sure that it's just one item being returned
-
     url = "http://127.0.0.1:5001/get-tasks";
     res = await axios.get(url, { headers: headersUser1 });
-    // console.log(res.data);
     expect(res.data.length).to.equal(1);
 
     url = "http://127.0.0.1:5001/get-tasks";
     res = await axios.get(url, { headers: headersUser2 });
-    // console.log(res.data);
     expect(res.data.length).to.equal(1);
 
     // make sure tech 1 cannot update tech 2's task
@@ -232,7 +216,6 @@ describe("Create a technician, create a task, update the task, read the task, de
 
     url = "http://127.0.0.1:5001/get-tasks";
     res = await axios.get(url, { headers: headersManager1 });
-    // console.log(res.data);
     expect(res.data.length).to.equal(1);
 
     // @ts-ignore
@@ -246,7 +229,6 @@ describe("Create a technician, create a task, update the task, read the task, de
 
     url = "http://127.0.0.1:5001/get-tasks";
     res = await axios.get(url, { headers: headersManager1 });
-    // console.log(res.data);
     expect(res.data.length).to.equal(0);
 
     // @ts-ignore
@@ -259,7 +241,6 @@ describe("Create a technician, create a task, update the task, read the task, de
 
     url = "http://127.0.0.1:5001/get-tasks";
     res = await axios.get(url, { headers: headersUser2 });
-    // console.log(res.data);
     expect(res.data.length).to.equal(1);
   });
 });

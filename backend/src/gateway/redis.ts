@@ -6,7 +6,6 @@ class RedisGateway {
   private subscriber: RedisClientType;
   constructor() {}
 
-  // TODO - check for closed connection too
   createRedisConnection = async () => {
     this.publisher = createClient({ url: process.env.TASK_MANAGER_REDIS_URL });
     await this.publisher.connect();
@@ -28,7 +27,6 @@ class RedisGateway {
     if (!this.publisher) {
       await this.createRedisConnection();
     }
-    console.log("CHANNEL: ", channel);
     await this.publisher.publish(channel, msg);
   };
 }

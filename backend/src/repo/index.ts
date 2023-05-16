@@ -69,11 +69,9 @@ class Repo {
     return uuids;
   };
 
-  // need to add a join here for the manager/technician requirement
   getTasks = async (uuids: string[]): Promise<Task[]> => {
     const conn = await MySQL.getDb();
 
-    // or just make a separate query to get everyone this manager reports to
     const tasks: Task[] = [];
     const query = `select * from ${CONSTANTS.TASKS_TABLE} 
         where deletedAtUTC is null and 
