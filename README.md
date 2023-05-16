@@ -263,3 +263,20 @@ In updateTask API, datePerformed should be automatically added by the server.
 In updateTask API, datePerformed is in UTC while everything else is in local time.
 
 Need to update all times to be in UTC time.
+
+## Todo's
+Use Tsyringe for dependency injection
+
+Add in expiration for JWT 
+
+Move JWT secret to env variable
+
+Add endpoint to assign a technician a manager. Decouple logic of creating a user from manager<>tech relationship
+
+Add a filter to be passed in as a param to GetTasks. For example, let tasks be queried by their createdByUuid (manager) or their properties.
+
+Add pagination to GetTasks
+
+Add in ORM library to use instead of raw queries
+
+Add in automatic script execution of schemas.sql to docker compose
